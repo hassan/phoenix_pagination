@@ -3,34 +3,38 @@ defmodule Phoenix.Pagination.Mixfile do
   @version "0.6.0"
 
   def project do
-    [app: :phoenix_pagination,
-     version: @version,
-     elixir: "~> 1.7",
-     elixirc_paths: path(Mix.env),
-     package: package(),
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps(),
-     aliases: aliases(),
-     name: "phoenix_pagination",
-     docs: [
-       main: "readme",
-       extras: ["README.md"],
-       source_ref: "v#{@version}"],
-     source_url: "https://github.com/FunkyStudioHQ/phoenix_pagination.git",
-     homepage_url: "https://github.com/FunkyStudioHQ/phoenix_pagination",
-     description: """
-     Simple pagination for Ecto and Phoenix using plaing EEx templates.
-     """]
+    [
+      app: :phoenix_pagination,
+      version: @version,
+      elixir: "~> 1.7",
+      elixirc_paths: path(Mix.env()),
+      package: package(),
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps(),
+      aliases: aliases(),
+      name: "phoenix_pagination",
+      docs: [
+        main: "readme",
+        extras: ["README.md"],
+        source_ref: "v#{@version}"
+      ],
+      source_url: "https://github.com/FunkyStudioHQ/phoenix_pagination.git",
+      homepage_url: "https://github.com/FunkyStudioHQ/phoenix_pagination",
+      description: """
+      Simple pagination for Ecto and Phoenix using plaing EEx templates.
+      """
+    ]
   end
 
   # Configuration for the OTP application
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: application(Mix.env)]
+    [applications: application(Mix.env())]
   end
-  defp application(:test), do: [:postgrex, :ecto_sql, :logger]
+
+  defp application(:test), do: [:phoenix_html, :postgrex, :ecto_sql, :logger]
   defp application(_), do: [:plug, :phoenix_html, :ecto, :ecto_sql, :logger]
 
   # Dependencies can be Hex packages:
@@ -62,6 +66,7 @@ defmodule Phoenix.Pagination.Mixfile do
   defp path(:test) do
     ["lib", "test/support", "test/fixtures"]
   end
+
   defp path(_), do: ["lib"]
 
   defp package do

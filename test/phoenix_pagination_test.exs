@@ -9,8 +9,8 @@ defmodule Phoenix.PaginationTest do
 
   defp create_products do
     for _ <- 1..15 do
-      %Product { name: "Product 1", price: 100.00 }
-      |> Repo.insert!
+      %Product{name: "Product 1", price: 100.00}
+      |> Repo.insert!()
     end
   end
 
@@ -58,8 +58,10 @@ defmodule Phoenix.PaginationTest do
 
   test "page offset constraint" do
     create_products()
-    {_items, phoenix_pagination} = Product
-    |> Repo.paginate(%{"page" => 100}, total_count: 3, per_page: 5, max_page: 10)
+
+    {_items, phoenix_pagination} =
+      Product
+      |> Repo.paginate(%{"page" => 100}, total_count: 3, per_page: 5, max_page: 10)
 
     assert phoenix_pagination.total_count == 3
     assert phoenix_pagination.total_pages == 1
