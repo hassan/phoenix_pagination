@@ -59,7 +59,8 @@ defmodule Phoenix.Pagination.Mixfile do
       {:earmark, "~> 1.4", only: :dev},
       {:ex_doc, "~> 0.26", only: :dev, runtime: false},
       # {:inch_ex, "~> 0.5", only: :dev}
-      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
+      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]},
+      {:dialyxir, "~> 1.3", only: [:dev, :test]}
     ]
   end
 
